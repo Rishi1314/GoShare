@@ -56,7 +56,7 @@ func UploadFiles(ctx *gin.Context) {
 }
 
 func DownloadFile(ctx *gin.Context) {
-	path, err := filepath.Abs("sync.io-cache")
+	path, err := filepath.Abs("cache")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,7 +68,7 @@ func DownloadFile(ctx *gin.Context) {
 	ctx.FileAttachment(filepath.Join(path, fileName), fileName)
 }
 func DownloadAllFiles(ctx *gin.Context) {
-	path, _ := filepath.Abs("sync.io-cache")
+	path, _ := filepath.Abs("cache")
 	files, err := getFilesInDir(path)
 	if err != nil {
 		ctx.String(http.StatusInternalServerError, "Failed to read directory: %v", err)
@@ -86,7 +86,7 @@ func DownloadAllFiles(ctx *gin.Context) {
 
 }
 func PreviewFile(ctx *gin.Context) {
-	path, err := filepath.Abs("sync.io-cache")
+	path, err := filepath.Abs("cache")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -98,7 +98,7 @@ func PreviewFile(ctx *gin.Context) {
 	ctx.File(filepath.Join(path, fileName))
 }
 func DeleteAllFiles(ctx *gin.Context) {
-	path, err := filepath.Abs("sync.io-cache")
+	path, err := filepath.Abs("cache")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -109,7 +109,7 @@ func DeleteAllFiles(ctx *gin.Context) {
 	ctx.Redirect(http.StatusFound, "/files")
 }
 func DeleteFile(ctx *gin.Context) {
-	path, err := filepath.Abs("sync.io-cache")
+	path, err := filepath.Abs("cache")
 	if err != nil {
 		log.Fatal(err)
 	}

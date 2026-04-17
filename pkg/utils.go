@@ -24,9 +24,9 @@ func OpenWebsite(url string) {
 	var error error
 	switch runtime.GOOS {
 	case "darwin":
-		error=exec.Command("open", url).Start()
+		error = exec.Command("open", url).Start()
 	case "linux":
-		error=exec.Command("xdg-open", url).Start()
+		error = exec.Command("xdg-open", url).Start()
 		if error != nil {
 			if _, ok := error.(*exec.Error); ok {
 				log.Println("xdg-open not found in PATH, please open the URL manually:", url)
@@ -34,9 +34,9 @@ func OpenWebsite(url string) {
 			}
 		}
 	case "windows":
-		error=exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
+		error = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
 	default:
-		error=fmt.Errorf("unsupported platform")
+		error = fmt.Errorf("unsupported platform")
 
 	}
 	if error != nil {
@@ -46,7 +46,7 @@ func OpenWebsite(url string) {
 }
 
 func GetIP() string {
-	connection,error:=net.Dial("udp", "8.8.8.8:80")
+	connection, error := net.Dial("udp", "8.8.8.8:80")
 	fmt.Println("In GetIP")
 
 	if error != nil {
@@ -90,9 +90,8 @@ func displayError(c *gin.Context, message string, err error) {
 	c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{"Note": message, "Error": err})
 }
 
-
 func getDir() string {
-	path, err := filepath.Abs("sync.io-cache")
+	path, err := filepath.Abs("cache")
 	if err != nil {
 		panic(err)
 	}
